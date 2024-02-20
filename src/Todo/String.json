@@ -1,0 +1,11 @@
+{
+    "header": "My List",
+    "_header.comment": "This string is for header",
+    "pivots" : {
+        "tasksTab" : "Tasks",
+        "taskFormTab" : "Task Form",
+
+        "completedTaskTab" : "Completed"
+    }
+}
+   
