@@ -8,7 +8,7 @@ import TaskList from './List/TaskList';
 import { initializeIcons } from '@fluentui/react';
 initializeIcons();
 
-const TodoContext = createContext({});
+export const TodoContext = createContext<{activeTasks : Itask[]}>({activeTasks : []});
 
 const Home = () => {
 
@@ -23,6 +23,11 @@ const Home = () => {
         {
             id: "1",
             title: "task 2",
+            isFav: false
+        },
+        {
+            id: "3",
+            title: "task 3",
             isFav: false
         }
     ];

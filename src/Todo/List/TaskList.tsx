@@ -1,28 +1,13 @@
 import React, { useContext } from 'react'
 import TaskListStyle from './TaskList.style';
 import { Checkbox, FontIcon, Stack, mergeStyles } from '@fluentui/react';
+import { TodoContext } from '../Home';
+import { Itask } from '../types';
 
-
-interface Itask {
-    id: string;
-    title: string;
-    isFav: boolean;
-}
 
 const TaskList = () => {
 
-    const tasks: Itask[]= [
-        {
-            id: "1",
-            title: "Task 1",
-            isFav: true
-        },
-        {
-            id: "2",
-            title: "task 2",
-            isFav: false
-        }
-    ];
+    const { activeTasks } = useContext(TodoContext);
 
     const onRenderCell = (task: Itask) => {
         return(
@@ -43,7 +28,7 @@ const TaskList = () => {
     }
   return (
     <div>
-       {tasks.map(onRenderCell)}
+       {activeTasks.map(onRenderCell)}
     </div>
   );
 }
