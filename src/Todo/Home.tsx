@@ -6,6 +6,8 @@ import { Itask, PivotKeysEnum } from './types';
 import TaskList from './List/TaskList';
 
 import { initializeIcons } from '@fluentui/react';
+import TodoProvider from './TodoProvider';
+import TaskForm from './TaskForm/TaskForm';
 initializeIcons();
 
 export const TodoContext = createContext<{activeTasks : Itask[]}>({activeTasks : []});
@@ -14,27 +16,9 @@ const Home = () => {
 
     const [selectedKey, setselectedKey] = useState<string>(PivotKeysEnum.Tasks);
 
-    const tasks: Itask[]= [
-        {
-            id: "1",
-            title: "Task 1",
-            isFav: true
-        },
-        {
-            id: "1",
-            title: "task 2",
-            isFav: false
-        },
-        {
-            id: "3",
-            title: "task 3",
-            isFav: false
-        }
-    ];
-
   return (
     <Stack className={HomeStyle.todoContainer}>
-        <TodoContext.Provider value={{activeTasks : tasks}}>
+        <TodoProvider>
 
        <header className={HomeStyle.headerStyle}>
            <h2>{TodoString.header}</h2>
@@ -50,14 +34,14 @@ const Home = () => {
           <TaskList/>
         </PivotItem>
         <PivotItem headerText={TodoString.pivots.taskFormTab} itemKey={PivotKeysEnum.TaskForm}>
-          <Label>Pivot #2</Label> 
+          <TaskForm/> 
         </PivotItem>
         <PivotItem headerText={TodoString.pivots.completedTaskTab} itemKey={PivotKeysEnum.Completed}>
           <Label>Pivot #3</Label>
         </PivotItem>
       </Pivot>
       </Stack>
-      </TodoContext.Provider>
+      </TodoProvider>
     </Stack>
 
   );

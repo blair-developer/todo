@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import TaskListStyle from './TaskList.style';
 import { Checkbox, FontIcon, Stack, mergeStyles } from '@fluentui/react';
-import { TodoContext } from '../Home';
+import { TodoContext } from '../TodoProvider';
 import { Itask } from '../types';
 
 
