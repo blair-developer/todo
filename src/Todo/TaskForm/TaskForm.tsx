@@ -1,32 +1,49 @@
 import { MessageBar, MessageBarType, PrimaryButton, Stack, TextField } from '@fluentui/react'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import useInput from './useinput';
+import { TodoContext } from '../TodoProvider';
+import { ActionTypeEnum, Itask } from '../types';
 
 const TaskForm = () => {
-const [title, setTitle] = useState("");
-const [description, setdescription] = useState("");
+const {dispatch} = useContext(TodoContext);
 
-const onTitleChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setTitle(event.currentTarget.value);
-}
-const onDescriptionChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setdescription(event.currentTarget.value);
+const [showMessage, setshowMessage] = useState<{type: MessageBarType, message: string}>({type: MessageBarType.success, message: ""});
+const title = useInput("");
+const description = useInput("");
+
+useEffect(() => {
+   if (showMessage.message) {
+     setTimeout(() => {
+        setshowMessage({ type: MessageBarType.success, message: ""});
+     }, 1000);
+   }
+}, [showMessage.message])
+
+const onFormSubmit = (event : React.FormEvent) => {
+   event.preventDefault();
+   const data: Itask = {id: "", title : title.value, description: description.value, isFav: false};
+   dispatch({type : ActionTypeEnum.Add, data: {}});
+   setshowMessage({type: MessageBarType.success, message: "Task Added"})
 }
 
   return (
-    <Stack>
-         <TextField label="Title" required  value={title}/>
-         <TextField label="Description" multiline rows={4} value={description}/>
+    <form onSubmit={onFormSubmit}>
+         <TextField label="Title" required {...title}/>
+         <TextField label="Description" multiline rows={4} {...description}/>
          <Stack horizontal tokens={{childrenGap: 20}} style={{marginTop: 20}}>
             <Stack style={{width : "80%"}}>
-            <MessageBar messageBarType={MessageBarType.success}>Task added succesful</MessageBar>
+              {showMessage.message && (
+              <MessageBar messageBarType={MessageBarType.success}>Task added succesful</MessageBar>
+            )}
+              
             </Stack>
             <Stack style={{width : "20%"}}>
-              <PrimaryButton text="Add Task"/>
+              <PrimaryButton type='submit' text="Add Task"/>
             </Stack>
            
        
          </Stack>
-    </Stack>
+    </form>
   )
 }
 
