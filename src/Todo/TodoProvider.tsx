@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import { ActionTypeEnum, IAddAction, ITodoContext, ITodoState, Itask } from './types';
+import { ActionTypeEnum, IAddAction, IDeleteAction, IReducerAction, ITodoContext, ITodoState, Itask } from './types';
 
 export const TodoContext = createContext<ITodoContext>({
     activeTasks : [],
@@ -10,15 +10,27 @@ type Props = {
     children : React.ReactNode;
 };
 
-const reducer = (state: ITodoState, action: IAddAction) => {
+const addTaskAction = (state: ITodoState, action: IAddAction) => {
+    const {data} = action;
+    data.id = new Date().toJSON();
+    return [action.data, ...state.activeTasks]
+}
+const deleteTaskAction = (state: ITodoState, action: IDeleteAction) => {
+       const activeTasks: Itask[] = JSON.parse(JSON.stringify(state.activeTasks));
+        const filteredData = activeTasks.filter(task => task.id !== action.data.id);
+        return filteredData;
+}
+
+const reducer = (state: ITodoState, action: IReducerAction) => {
     console.log(state);
     console.log(action);
 
     switch(action.type){
         case ActionTypeEnum.Add: 
-        const {data} = action;
-        data.id = new Date().toJSON();
-        return {...state, activeTasks: [action.data, ...state.activeTasks]}
+       
+        return {...state, activeTasks: addTaskAction(state, action)};
+        case ActionTypeEnum.Delete:
+        return {...state, activeTasks : deleteTaskAction(state, action)};
     }
     return {...state};
 };

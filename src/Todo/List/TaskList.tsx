@@ -3,14 +3,16 @@ import TaskListStyle from './TaskList.style';
 import { Checkbox, FontIcon, Stack, mergeStyles } from '@fluentui/react';
 import { TodoContext } from '../TodoProvider';
 import { ActionTypeEnum, Itask } from '../types';
-
+import TodoString from '../String.json';
 
 const TaskList = () => {
 
     const { activeTasks, dispatch } = useContext(TodoContext);
 
     const onTaskDelete = (id: string) => {
-        dispatch ({ type: ActionTypeEnum.Delete, data: {id}});
+        if (window.confirm(TodoString.deleteConfirm)) {
+          dispatch ({ type: ActionTypeEnum.Delete, data: {id}});
+        }
     }
 
     const onRenderCell = (task: Itask) => {
@@ -24,7 +26,7 @@ const TaskList = () => {
               <FontIcon iconName="info" className={TaskListStyle.iconStyle} />
               <FontIcon iconName={task.isFav ? "FavoriteStarFill" : "FavoriteStar"} className={TaskListStyle.iconStyle} />
               <FontIcon iconName="EditNote" className={TaskListStyle.iconStyle} />
-              <FontIcon iconName="Delete" className={TaskListStyle.iconStyle} onClick={onTaskDelete} />
+              <FontIcon iconName="Delete" className={TaskListStyle.iconStyle} onClick={() => onTaskDelete(task.id)} />
               
             </Stack>
         </Stack>

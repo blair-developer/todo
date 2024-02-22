@@ -6,6 +6,8 @@
         "taskFormTab" : "Task Form",
 
         "completedTaskTab" : "Completed"
-    }
+    },
+    "deleteConfirm": "Are you sure, you want to delete the task?"
 }
+
    

@@ -20,7 +20,7 @@ const HomeStyle: IProcessedStyleSet<iHomeStyle> = mergeStyleSets({
     },
     headerStyle: {
         height: 90,
-        backgroundColor: "cadetblue",
+        backgroundColor: "cyan",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

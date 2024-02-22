@@ -25,8 +25,13 @@ export interface ITodoState {
      Add,
      Delete
   }
-
+  export type IReducerAction = IAddAction | IDeleteAction;
   export interface IAddAction{
     type: ActionTypeEnum.Add,
     data: Itask
+  }
+
+  export interface IDeleteAction{
+     type: ActionTypeEnum.Delete,
+     data: { id: string}
   }
