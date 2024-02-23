@@ -11,7 +11,7 @@ interface iHomeStyle{
 const HomeStyle: IProcessedStyleSet<iHomeStyle> = mergeStyleSets({
     todoContainer : {
        width: "50%",
-       height: "80%",
+       height: "60%",
        position: "absolute",
        top: "50%",
        left: "50%",
@@ -19,15 +19,15 @@ const HomeStyle: IProcessedStyleSet<iHomeStyle> = mergeStyleSets({
        boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",    
     },
     headerStyle: {
-        height: 90,
-        backgroundColor: "cyan",
+        height: 50,
+        backgroundColor: "beige",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        color: "white",
+        color: "maroon",
     },
     pivotRoot: {
-        display: "flex",
+        display: "inline-block",
         justifyContent:"center"
     },
     pivotContainer: {

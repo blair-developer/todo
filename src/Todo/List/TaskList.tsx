@@ -24,7 +24,7 @@ const TaskList = () => {
             </Stack>
             <Stack horizontal style={{width: "15%"}}>
               <FontIcon iconName="info" className={TaskListStyle.iconStyle} />
-              <FontIcon iconName={task.isFav ? "FavoriteStarFill" : "FavoriteStar"} className={TaskListStyle.iconStyle} />
+              {/*<FontIcon iconName={task.isFav ? "FavoriteStarFill" : "FavoriteStar"} className={TaskListStyle.iconStyle} /> */}
               <FontIcon iconName="EditNote" className={TaskListStyle.iconStyle} />
               <FontIcon iconName="Delete" className={TaskListStyle.iconStyle} onClick={() => onTaskDelete(task.id)} />
               
